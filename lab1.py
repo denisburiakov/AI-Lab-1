@@ -11,8 +11,10 @@
 и датасет имел удобоваримый вид
 7. Выгрузить код и результаты на гитхаб (сбросить ссылку
 преподавателю)'''
-
+#1-----------------------------------------------------------
 import pandas as pd
+from sklearn.preprocessing import MImMAxScaler, MinMaxScaler
+
 train_df = pd.read_csv('train.csv')
 test_df = pd.read_csv('test.csv')
 #2-----------------------------------------------------------
@@ -35,6 +37,7 @@ print("-" * 100)
 Nan_matrix = df.isnull()
 print(Nan_matrix.sum())
 print("-" * 100)
+
 #4-----------------------------------------------------------
 df['Age'] = df['Age'].fillna(df['Age'].median())
 
@@ -44,6 +47,13 @@ df['Cabin'] = df['Cabin'].fillna('U')
 
 print(df.isnull().sum())
 print("-" * 100)
+
+#5-----------------------------------------------------------
+scaler = MinMaxScaler()
+da['Age'] = scaler.fit_transform(da['Age', 'Fare'])
+
+
+
 
 
 
