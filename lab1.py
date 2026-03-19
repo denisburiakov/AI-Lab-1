@@ -13,7 +13,7 @@
 преподавателю)'''
 #1-----------------------------------------------------------
 import pandas as pd
-from sklearn.preprocessing import MImMAxScaler, MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 train_df = pd.read_csv('train.csv')
 test_df = pd.read_csv('test.csv')
@@ -50,9 +50,11 @@ print("-" * 100)
 
 #5-----------------------------------------------------------
 scaler = MinMaxScaler()
-da['Age'] = scaler.fit_transform(da['Age', 'Fare'])
 
+df[['Age', 'Fare']] = scaler.fit_transform(df[['Age', 'Fare']])
 
+#6-----------------------------------------------------------
+#df = pd.get_dummies(df, columns =['Age'], drop_first = True)
 
 
 
