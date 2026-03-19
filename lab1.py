@@ -54,9 +54,12 @@ scaler = MinMaxScaler()
 df[['Age', 'Fare']] = scaler.fit_transform(df[['Age', 'Fare']])
 
 #6-----------------------------------------------------------
-#df = pd.get_dummies(df, columns =['Age'], drop_first = True)
+df = pd.get_dummies(df, columns =['Sex', 'Embarked'], drop_first = True)
 
-
-
-
+#Final
+print("Final dataset:")
+print(df.head())
+print("-" * 100)
+print("dataset types:")
+print(df.dtypes)
 
