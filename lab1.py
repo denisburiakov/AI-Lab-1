@@ -115,21 +115,29 @@ print("-" * 100)
 
 #4-----------------------------------------------------------
 from sklearn.linear_model import LogisticRegression
+
 X2 = df.drop(['Survived', 'Name', 'Ticket', 'Cabin'], axis = 1)
 Y2 = df['Survived']
 X_train2, X_test2, Y_train2, Y_test2 = train_test_split(X2, Y2, test_size = 0.4, random_state = 42)
-
 X_test2, X_val2, Y_test2, Y_val2 = train_test_split(X_test2, Y_test2, test_size = 0.4, random_state = 42)
 logreg_model = LogisticRegression(max_iter=1000)
 logreg_model.fit(X_train2, Y_train2)
 y_pred_test2 = logreg_model.predict(X_test2)
-
 print("Y predict: ")
 print(y_pred_test2)
 print("-" * 100)
 
+#5-----------------------------------------------------------
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(Y_test2, y_pred_test2)
+print(f"Accuracy = {accuracy} ")
+print("-" * 100)
 
-
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(Y_test2, y_pred_test2)
+print("Confusion Matrix:")
+print(cm)
+print("-" * 100)
 
 
 
