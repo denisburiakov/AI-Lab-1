@@ -2,7 +2,6 @@
 
 #1-----------------------------------------------------------
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 train_df = pd.read_csv('train.csv')
 test_df = pd.read_csv('test.csv')
@@ -38,6 +37,7 @@ print(df.isnull().sum())
 print("-" * 100)
 
 #5-----------------------------------------------------------
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 scaler = MinMaxScaler()
 
 df[['Age', 'Fare']] = scaler.fit_transform(df[['Age', 'Fare']])
@@ -112,6 +112,22 @@ from sklearn.metrics import mean_absolute_error
 MAE = mean_absolute_error(Y_test, Y_pred_test)
 print(f"MAE = {MAE} " )
 print("-" * 100)
+
+#4-----------------------------------------------------------
+from sklearn.linear_model import LogisticRegression
+X2 = df.drop(['Survived', 'Name', 'Ticket', 'Cabin'], axis = 1)
+Y2 = df['Survived']
+X_train2, X_test2, Y_train2, Y_test2 = train_test_split(X2, Y2, test_size = 0.4, random_state = 42)
+
+X_test2, X_val2, Y_test2, Y_val2 = train_test_split(X_test2, Y_test2, test_size = 0.4, random_state = 42)
+logreg_model = LogisticRegression(max_iter=1000)
+logreg_model.fit(X_train2, Y_train2)
+y_pred_test2 = logreg_model.predict(X_test2)
+
+print("Y predict: ")
+print(y_pred_test2)
+print("-" * 100)
+
 
 
 
