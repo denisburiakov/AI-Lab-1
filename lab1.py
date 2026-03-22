@@ -68,21 +68,33 @@ print(df.dtypes)
 #1-----------------------------------------------------------
 from sklearn.model_selection import train_test_split
 
-X = df.drop(['Survived'], axis = 1)
-Y = df['Survived']
+X = df.drop(['Fare', 'Name', 'Ticket', 'Cabin'], axis = 1)
+Y = df['Fare']
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.4, random_state = 42)
 
 X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size = 0.4, random_state = 42)
 print("-" * 100)
 print("Test info: ")
 print(X_train.head())
-print(X_train.head())
+print("-" * 100)
 print(X_test.head())
+print("-" * 100)
 print(Y_train.head())
+print("-" * 100)
 print(Y_test.head())
+print("-" * 100)
 print(Y_val.head())
+print("-" * 100)
 
 #2-----------------------------------------------------------
+from sklearn.linear_model import LinearRegression
+linear_model = LinearRegression()
+linear_model.fit(X_train, Y_train)
+Y_pred_test = linear_model.predict(X_test)
+
+print("Y predict: ")
+print(Y_pred_test)
+
 
 
 
