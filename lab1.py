@@ -94,6 +94,24 @@ Y_pred_test = linear_model.predict(X_test)
 
 print("Y predict: ")
 print(Y_pred_test)
+print("-" * 100)
+
+#3-----------------------------------------------------------
+from sklearn.metrics import mean_squared_error
+
+MSE = mean_squared_error(Y_test, Y_pred_test)
+print(F"MSE = {MSE} ")
+print("-" * 100)
+
+from sklearn.metrics import root_mean_squared_error
+RMSE = root_mean_squared_error(Y_test, Y_pred_test)
+print(f"RMSE = {RMSE} ")
+print("-" * 100)
+
+from sklearn.metrics import mean_absolute_error
+MAE = mean_absolute_error(Y_test, Y_pred_test)
+print(f"MAE = {MAE} " )
+print("-" * 100)
 
 
 
