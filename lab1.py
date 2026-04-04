@@ -127,3 +127,27 @@ print(f"MAE = {mae_dt}")
 print("-"*100)
 
 #3-----------------------------------------------------------
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import roc_curve, auc
+dt_classifier_model = DecisionTreeClassifier()
+dt_classifier_model.fit(X_train2, Y_train2)
+
+y_proba = dt_classifier_model.predict_proba(X_test2)
+
+fpr, tpr, thresholds = roc_curve(Y_test2, y_proba[:, 1])
+auc_metric=auc(fpr, tpr)
+print("Decision Tree Classification Results:")
+print("-"*100)
+print(f"ROC AUC Score: {auc_metric:.4f}")
+print("-" * 100)
+plt.plot(fpr, tpr, marker='o')
+plt.ylim([0,1.1])
+plt.xlim([0,1.1])
+plt.ylabel('TPR')
+plt.xlabel('FPR')
+plt.title('ROC curve')
+plt.show()
+
+
+
