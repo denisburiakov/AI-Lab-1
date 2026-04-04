@@ -2,7 +2,7 @@
 
 #1-----------------------------------------------------------
 import pandas as pd
-
+import matplotlib.pyplot as plt
 heart_df = pd.read_csv('heart.csv')
 #2-----------------------------------------------------------
 df = heart_df.copy()
@@ -11,7 +11,7 @@ print("First 5 columns: ")
 print("-" * 100)
 print(df.head())
 print("-" * 100)
-print("Dataset info: ")
+print("Data set info: ")
 print("-" * 100)
 df.info()
 print("-" * 100)
@@ -50,15 +50,10 @@ print("-" * 100)
 
 #1-----------------------------------------------------------
 from sklearn.model_selection import train_test_split
-
-# РЕГРЕССИЯ: предсказываем thalach (макс. пульс)
-# Убираем таргет классификации (target) и саму целевую переменную регрессии
 X = df.drop(['thalach', 'target'], axis=1)
 Y = df['thalach']
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.4, random_state=42)
-
-# Валидационная выборка
 X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size=0.4, random_state=42)
 
 #2-----------------------------------------------------------
@@ -103,3 +98,32 @@ cm = confusion_matrix(Y_test2, y_pred_test2)
 print("Confusion Matrix:")
 print(cm)
 print("-" * 100)
+
+#Lab3--------------------------------------------------------
+'''1. Использовать датасет, подготовленный на первой лабораторной работе
+2. Решить задачу регрессии для одного из непрерывных признаков в
+датасете. Оценить работу регрессионной модели
+3. Решить задачу классификации и оценить работу модели с помощью
+ROC-кривой
+4. Выгрузить результат работы на Github'''
+
+#2-----------------------------------------------------------
+
+from sklearn.tree import DecisionTreeRegressor
+
+dt_regressor_model = DecisionTreeRegressor()
+dt_regressor_model.fit(X_train, Y_train)
+
+Y_pres_dt = dt_regressor_model.predict(X_test)
+
+mse_dt = mean_squared_error(Y_test, Y_pres_dt)
+rmse_dt = root_mean_squared_error(Y_test, Y_pres_dt)
+mae_dt = mean_absolute_error(Y_test, Y_pres_dt)
+print("Decision Tree Regression Results:")
+print("-"*100)
+print(f"MSE = {mse_dt}")
+print(f"RMSE = {rmse_dt}")
+print(f"MAE = {mae_dt}")
+print("-"*100)
+
+#3-----------------------------------------------------------
